@@ -1,0 +1,43 @@
+= HasEnum
+
+The has_enum extension provides an association with an enumeration class which requires the renum gem (sudo gem install renum).
+
+*Note*: We prefer to use the pkwde renum fork: github.com/pkwde/renum
+
+== Example
+        
+  # Class that has an Enumartion associated
+
+  class Customer < ActiveRecord::Base
+          has_enum :customer_state # needs customer_state_type column in database
+  end
+
+  customer = Customer.new
+
+  # Before setting any enum
+  customer.customer_state # => nil
+  customer.customer_state_type # => ""
+
+  customer.customer_state = CustomerState::Premium
+  customer.customer_state # => CustomerState::Premium
+  customer.customer_state_type # => "Premium"
+  customer.customer_state_has_changed? # => true
+
+  # Define the Enum-Class.
+  # For more information have a look at the renum gem
+  enum :CustomerState do
+          attr_reader :monthly_due
+
+          Free(0)
+          Basic(5.95)
+          Premium(19.95)
+
+          def init(monthly_due)
+         @monthly_due = monthly_due
+    end
+  end
+
+  premium_state = CustomerState::Premium
+  premium_state.monthly_due # => 19.95
+  
+Copyright (c) 2008 [Dirk Breuer, Alexander Gräfe and Ethem Küçük], released under the MIT license
