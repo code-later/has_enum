@@ -29,12 +29,12 @@ module Pkwde
         end
 
         define_method("#{enum_name}=") do |enum_to_set|
+          # This ensures backwards compability with the renum gem. In the
+          # +pkwde-renum+ gem this comparsion bug is already fixed.
           if enum_to_set.kind_of?(enum_class) && enum_class.include?(enum_to_set)
             unless enum_to_set == self.send(enum_name)
               self[enum_column] = enum_to_set.name
               @enum_changed = true
-            else
-              @enum_changed = false
             end
           else
             raise ArgumentError, "expected #{enum_class}, got #{enum_to_set.class}"
