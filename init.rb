@@ -1,4 +1,4 @@
 require 'renum'
-require 'has_enum'
+require 'pkwde/has_enum'
 
-ActiveRecord::Base.send :include, HasEnum
+ActiveRecord::Base.send :include, Pkwde::HasEnum
