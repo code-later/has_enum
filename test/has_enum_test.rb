@@ -50,10 +50,6 @@ class HasEnumTest < Test::Unit::TestCase
     assert_equal Product::Gold.name, enum_with_custom_column_name.product_enum
   end
 
-  def test_should_raise_exception_if_enumable_class_has_no_enum_column
-    assert_raise(ArgumentError) { ClassWithCustomNameEnum.has_enum :product, :column_name => "bad_column_name" }
-  end
-
   def test_should_raise_class_not_found_exception_if_enum_class_not_found
     assert_raise(NameError) { ClassWithoutEnum.has_enum :foo }
   end

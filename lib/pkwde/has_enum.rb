@@ -24,10 +24,6 @@ module Pkwde
         # Enum must be a Renum::EnumeratedValue Enum
         raise ArgumentError, "expected Renum::EnumeratedValue" unless enum_class.superclass == Renum::EnumeratedValue
 
-        unless self.column_names.include? enum_column
-          raise ArgumentError, "There is no column #{enum_column} to store the enum value."
-        end
-
         define_method("#{enum_name}") do
           return self[enum_column] ? enum_class.const_get(self[enum_column]) : nil
         end
