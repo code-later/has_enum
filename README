@@ -4,12 +4,17 @@ The has_enum extension provides an association with an enumeration class which r
 
 *Note*: We prefer to use the pkwde renum fork: github.com/pkwde/renum
 
+== Installation
+
+You have to make sure to have a column in your database table to store the string representation of the associated enum instance. The plugin will look
+by default for a column named like the enum itself plus the "_type" suffix.
+
 == Example
         
   # Class that has an Enumartion associated
 
   class Customer < ActiveRecord::Base
-          has_enum :customer_state # needs customer_state_type column in database
+    has_enum :customer_state # needs customer_state_type column in database
   end
 
   customer = Customer.new
@@ -26,14 +31,14 @@ The has_enum extension provides an association with an enumeration class which r
   # Define the Enum-Class.
   # For more information have a look at the renum gem
   enum :CustomerState do
-          attr_reader :monthly_due
-
-          Free(0)
-          Basic(5.95)
-          Premium(19.95)
-
-          def init(monthly_due)
-         @monthly_due = monthly_due
+    attr_reader :monthly_due
+  
+    Free(0)
+    Basic(5.95)
+    Premium(19.95)
+  
+    def init(monthly_due)
+      monthly_due = monthly_due
     end
   end
 
