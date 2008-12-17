@@ -1,6 +1,7 @@
 require 'test/unit'
 
 require 'rubygems'
+require 'mocha'
 require 'active_record'
 
 $:.unshift File.dirname(__FILE__) + '/../lib'
